@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <style>
+        #main {
+            width:390px;
+            height:410px;
+            font-family: "Gotham", serif;
+            border: 1px solid #353535;
+            border-radius: 10px;
+            background-color: #121212;
+            margin: auto;
+            margin-top: 60px;
+            color:white;
+            padding:40px 100px;
+        }
+        h1{
+            font-size: 24px;
+            font-family: "Gotham",sans-serif;
+        }
+        h4 {
+            font-family: "Gotham", sans-serif;
+            font-size: 14px;
+        }
+        #p2{
+            font-family: "Gotham", sans-serif;
+            font-size: 14px; 
+            
+        }
+        label {
+            align-items: center;
+            font-size: 12px;
+            font-family: "Gotham", sans-serif;
+        }
+        #show, #empty {
+            color:red;
+            margin-top: 0px;
+            
+        }
+        
+        #mobile {
+            color:white;
+            padding:5px;
+            font-size: 18px;
+            background-color: transparent;
+            border:transparent;
+            width:300px
+        }
+        #hr {
+            border: 1px solid;
+            color: turquoise;
+            background-color: turquoise;
+            
+        }
+        button {
+            margin-top: 10px;
+            padding: 10px 15px;
+            border-radius: 10px;
+            background-color: turquoise;
+            border-color: transparent;
+            cursor: pointer;
+            font-family: "Gotham", sans-serif;
+
+        }
+        #check_box{
+            margin-right: 10px;
+            cursor: pointer;
+            height:22px;
+            width:22px;
+            
+        
+
+        }
+        a{
+            color: turquoise;
+            text-decoration: underline;
+        }
+        #bottem {
+            text-align: center;
+            
+        }
+       
+        #p2 {
+            margin-top: 50px;
+            margin-bottom: 50px;
+        }
+       
+
+        #mobile:focus {
+            outline: none
+        }
+        
+        
+        #check_div  {
+            width:180px;
+            margin: auto;
+            margin-top: 10px;
+            display: flex;
+            justify-content: center;
+            align-items:center;
+            
+        }
+        #check_div label {
+            cursor:pointer;
+            display:flex;
+        
+        }
+        #check_div input[type = "checkbox"]{
+            cursor: pointer;
+            opacity: 0;
+            position: absolute;
+        }
+        #check_div label::before {
+            content: '';
+            border: 1px solid gray;
+            background-color: #121212;
+            border-radius: 3px;
+            width:22px;
+            height:22px;
+            margin-right:10px;
+        
+        }
+        #check_div input[type='checkbox']:checked + label::before {
+            content: '\002714';
+            background-color: turquoise;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color:#121212;
+            font-size: 15px;
+
+        }
+
+
+        @media only screen and (min-width:0px) and (max-width:640px) {
+            #main {
+                width:auto;
+                height:auto;                                                    
+                padding: 40px 20px;
+            }
+             
+            #mobile {
+                width:80%
+            }
+            label{
+                margin-top: 20px;
+                font-size: 10px;
+            }
+            #check_div label::before {
+                width:18px;
+                height:18px;
+                
+            
+            }
+        }
+
+
+
+        </style>
+</head>
+<body>
+    <div>
+        <div id = "main">
+            <h2>Sign up required</h2>
+            <h4>We could not find this number in our records. Create a new account using this number</h4>
+            <input id = "mobile" type="tel" placeholder="Enter Mobile Number">
+            <div id = "hr"></div>
+            <p id = "show"></p>
+            <div id = "bottem">
+                <p id = "empty"></p>
+                <button onclick = "signUp()" id = "button">VERIFY MOBILE NUMBER</button>
+                <br>
+                <div id = "check_div">
+                    <input id = "check_box" class = "check" checked = "checked" type="checkbox">
+                     <label>Keep me signed in</label>
+                     
+                </div>
+                
+                <p id = "p2">Existing user? <a href="signin.html">Login</a></p>
+                <h4>By continuing you agree to our <a>Terms of Use</a> & <a>Privacy Policy</a></h4>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>
+<script>
+
+    var cromaUsers = JSON.parse(localStorage.getItem("cromaUserData")) || []
+
+    let otpData = JSON.parse(localStorage.getItem("otpData")) || []
+
+    document.getElementById("mobile").addEventListener("keypress", showAlert)
+
+    let show = document.getElementById("show");
+    
+    let empty = document.getElementById("empty");
+
+    function showAlert(){
+        show.textContent = ""
+        empty.textContent = ""
+    }
+
+    //console.log(cromaUsers)
+
+    function signUp(){
+        let input = document.getElementById("mobile").value
+        
+        if (input.length > 0 && input.length<10){
+            empty.textContent = ""
+            show.textContent = "Incorrect number,Please enter a 10 digit mobile number or email to receive your OTP"
+        }
+        else if (input.length < 1){
+
+            show.textContent = ""
+            empty.textContent = "This field is required"
+        }
+        else{
+            let obj = {
+                mobile: input,
+                email: "dummy@email.com"
+            }
+            cromaUsers.push(obj)
+
+            let otp = Math.floor(1000 + Math.random()*9000)
+
+            let otp_data = {
+                mobile:input,
+                otp:otp
+            }
+
+            otpData.push(otp_data)
+
+            alert(`${otp} is your OTP to register with Croma. This OTP is valid for 15 minutes`)
+
+            window.location.href = "otp.html"
+
+
+        }
+        
+
+        localStorage.setItem("cromaUserData", JSON.stringify(cromaUsers))
+
+        localStorage.setItem("otpData", JSON.stringify(otpData))
+        
+    }
+
+    
+    
+</script>

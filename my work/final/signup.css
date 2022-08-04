@@ -1,0 +1,166 @@
+#main {
+    width:390px;
+    height:410px;
+    font-family: "Gotham", serif;
+    border: 1px solid #353535;
+    border-radius: 10px;
+    background-color: #121212;
+    margin: auto;
+    margin-top: 60px;
+    color:white;
+    padding:40px 100px;
+}
+body {
+    padding: 0px;
+    margin: 0px;
+    background-repeat: no-repeat;
+    background-image: url("https://lh3.googleusercontent.com/Q-_VA9TXEtkXOpoE2IoMvPiQqGrpeS1DU-La-PCIqmlG02DOhxu_rZLcK455txRR1RzlLJGXXnxt_prx9TEp-LoidJcrslBbSHWjaTb0JwWvggu1g5mKS7Cki-0FqTFbEg38Wwv3E_f5RvlgPYlfq8xm3gq5Kc-bY1RYW4CgVIC3g2DTrh0L2wTZ_ScBQrwaa1v0rWZTuySGEsIhyv5EXjjgR5L-W5Hw1EtgTnRpVzHQFKnx4DghLRqDfwD7txhq7LD-OkIlT4C7fJqbksZHsVMBpzO-hZ0D3aPx91bR0a21TxrZidux-wUSk3JNASd6wpG0iqCbgIQgHS9V4ymLD90uLrT6YbQ0bPVWvAbVgh_IFkrJy1_FmQ8STpgjXsrV2O950D2yHe1lW_Bicb6EwzqP8v9xfliyVld7kPbfMqlBpsFH2Dl5XBGRXprdpskpEEaYdUessWEA3_EwhQrSXc5_rhSNzsCqm2DheesTju619C12JoJOkKTLzYmacKGqKm9i8g2V76rQXc_Wpqzxs3MQAeYvkx8wW0rzHPrPvF9OLRXScATvGRkLjd7xRJo85K56AhvCVNDccEv-UTnIdqwa2Q6_nMpNVerIUwiiEcOJ9FO8S7bfUHcJsPS_0aHca6UDI1G5TLbZjiPIrwQM-eR2iQEuh_I7rb45BcrS5nzsFkfujNDd8bUQT56Os9edRLT5fbL_f3doT07r-iAgzdrmsw=w1339-h617-no?authuser=0");
+    background-size: cover;
+    background-size: 100%;
+    
+    
+}
+#pw2{
+    width: 100%;
+    height:100%;
+    background: rgb(22 21 21 / 82%)
+}
+h1{
+    font-size: 24px;
+    font-family: "Gotham",sans-serif;
+}
+h4 {
+    font-family: "Gotham", sans-serif;
+    font-size: 14px;
+}
+#p2{
+    font-family: "Gotham", sans-serif;
+    font-size: 14px; 
+    
+}
+label {
+    align-items: center;
+    font-size: 12px;
+    font-family: "Gotham", sans-serif;
+}
+#show, #empty {
+    color:red;
+    margin-top: 0px;
+    
+}
+
+#mobile {
+    color:white;
+    padding:5px;
+    font-size: 18px;
+    background-color: transparent;
+    border:transparent;
+    width:300px
+}
+#hr {
+    border: 1px solid;
+    color: turquoise;
+    background-color: turquoise;
+    
+}
+button {
+    margin-top: 10px;
+    padding: 10px 15px;
+    border-radius: 10px;
+    background-color: turquoise;
+    border-color: transparent;
+    cursor: pointer;
+    font-family: "Gotham", sans-serif;
+
+}
+#check_box{
+    margin-right: 10px;
+    cursor: pointer;
+    height:22px;
+    width:22px;
+    
+
+
+}
+a{
+    color: turquoise;
+    text-decoration: underline;
+}
+#bottem {
+    text-align: center;
+    
+}
+
+#p2 {
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+
+#mobile:focus {
+    outline: none
+}
+
+
+#check_div  {
+    width:180px;
+    margin: auto;
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    
+}
+#check_div label {
+    cursor:pointer;
+    display:flex;
+
+}
+#check_div input[type = "checkbox"]{
+    cursor: pointer;
+    opacity: 0;
+    position: absolute;
+}
+#check_div label::before {
+    content: '';
+    border: 1px solid gray;
+    background-color: #121212;
+    border-radius: 3px;
+    width:22px;
+    height:22px;
+    margin-right:10px;
+
+}
+#check_div input[type='checkbox']:checked + label::before {
+    content: '\002714';
+    background-color: turquoise;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color:#121212;
+    font-size: 15px;
+
+}
+
+
+@media only screen and (min-width:0px) and (max-width:640px) {
+    #main {
+        width:80%;
+        height:auto;                                                    
+        padding: 40px 20px;
+    }
+     
+    #mobile {
+        width:80%
+    }
+    label{
+        margin-top: 20px;
+        font-size: 10px;
+    }
+    #check_div label::before {
+        width:18px;
+        height:18px;
+        
+    
+    }
+}

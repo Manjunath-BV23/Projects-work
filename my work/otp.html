@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTP</title>
+    <style>
+        #mainOtp {
+            width:300px;
+            
+            border: 1px solid #353535;
+            border-radius: 10px;
+            background-color: #121212;
+            margin: auto;
+            margin-top: 60px;
+            color:white;
+            padding:60px 100px;
+        }
+        
+        #otp {
+            color:white;
+            font-size: 22px;
+            background-color: transparent;
+            border: none;
+            width:70%;
+            padding-left:11% ;
+            letter-spacing:40px;
+            
+        }
+        
+        button {
+            margin-top: 10px;
+            padding: 10px 15px;
+            border-radius: 10px;
+            color:#a1a1a1;
+            border-color: transparent;
+
+        }
+       
+        a{
+            color: turquoise;
+            text-decoration: underline;
+            cursor: pointer;
+
+        }
+        #bottem {
+            margin-top: 30px;
+            text-align: center;
+            
+        }
+        
+        #p3 {
+            margin-top: 50px;
+            margin-bottom: 50px;
+        }
+        body {
+            background-color:transparent;
+        }
+
+        #otp:focus {
+            outline: none;
+        }
+        #underlines {
+            margin:auto;
+            width:60%;
+            display: flex;
+            padding-left: 0px;
+            
+
+        }
+
+        .under {
+            width:20px;
+            border:1px solid white;
+            
+        }
+        .line {
+            margin-left: 20%;
+        }
+        #validMsg {
+            font-size: small;
+            font-family: "fantasy";
+            
+        }
+
+        @media only screen and (min-width:0px) and (max-width:640px) {
+            #mainOtp {
+                width:80%; 
+                height:auto;                                                     
+                padding: 40px 20px;
+            }
+            
+             
+            #otp {
+                width:230px;
+                padding-left:11%;
+                letter-spacing: 45px;
+            }
+            .under {
+                width:20px;
+                border:1px solid white;
+                
+            }
+            #underlines {
+                width:190px
+            }
+            .line {
+                margin-left: 18%;
+            }
+
+            label{
+                margin-top: 20px;
+                font-size: 10px;
+            }
+            #check_div label::before {
+                width:18px;
+                height:18px;
+                
+            
+            }
+        }
+        
+    </style>
+</head>
+<body>
+    <div>
+        <div id = "mainOtp">
+            <h2>Enter OTP</h2>
+            <h4 id = "success">OTP sent successfully to </h4>
+            <div id = "bottem">
+                <input id = "otp" type="" maxlength = "4" placeholder="">
+                <div id = "underlines">
+                    <div class = "under "></div>
+                    <div class = "under line"></div>
+                    <div class = "under line"></div>
+                    <div class = "under line"></div>
+                </div>
+                <button onclick = "otpCheck()" id = "button">VALIDATE OTP</button>
+                
+                <p id = "p3">This OTP is valid for 15 minutes</p>
+                <h4>Didn't Receive Your OTP? <span id = "validMsg"></span><a id = "receive" onclick = "sendOtp()"></a> </h4>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>
+<script>
+    let input = document.getElementById("otp").value;
+
+    let btn = document.getElementById("button")
+    btn.disabled = true;
+
+    let enter = document.getElementById("otp")
+     enter.addEventListener("keypress", valid)
+
+     var count = 0;
+     function valid(){
+        count++
+        if(count == 4){
+            btn.disabled = false;
+            btn.style.backgroundColor = "turquoise";
+            btn.style.color = "#121212"
+
+            console.log("valid")
+        }
+        else{
+            btn.disabled = true;
+        }
+        
+     }
+
+
+    //console.log(input)
+
+    var otpData = JSON.parse(localStorage.getItem("otpData"))
+    
+    let phone = otpData[otpData.length-1].mobile
+    
+    let a = document.createElement("a");
+    a.textContent = phone;
+
+
+    let msg = document.getElementById("success");
+    msg.append(a)
+
+    //msg.textContent = `OTP sent successfully to ${a}`
+
+
+    //console.log(cromaUsers)
+
+    function otpCheck(){
+        
+        window.location.href = "./home.html"
+    }
+
+    let otp = Math.floor(1000 + Math.random()*9000)
+
+    function sendOtp(){
+        alert(`${otp} is your OTP to register with Croma. This OTP is valid for 15 minutes`)
+        let i = 30;
+    let id = setInterval(function (){
+        let receive = document.getElementById("receive")
+        if(i == 0){
+            clearInterval(id)
+
+            validMsg.textContent = null
+            receive.textContent = "Resend"
+
+        }
+        else {
+            validMsg.textContent = `Resend in ${i} secs`;
+
+            receive.textContent = null
+        }
+        console.log(i);
+        
+        i--;
+    }, 1000)
+    }
+
+    let validMsg = document.getElementById("validMsg")
+    let receive = document.getElementById("receive")
+
+    
+    
+
+    let i = 30;
+    let id = setInterval(function (){
+        if(i == 0){
+            clearInterval(id)
+
+            validMsg.textContent = null
+            receive.textContent = "Resend"
+
+        }
+        else {
+            validMsg.textContent = `Resend in ${i} secs`
+        }
+        console.log(i);
+        
+        i--;
+    }, 1000)
+    
+</script>
